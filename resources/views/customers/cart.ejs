@@ -1,27 +1,29 @@
 <section class="cart py-16 ">
+    <%if(session.cart) { %>
     
     <div class="order container mx-auto w-1/2">
         <div class="flex items-center border-b border-gray pb-4 ">
             <img class="w-10" src="/img/Cart.png" alt="">
             <h1 class="font-bold ml-4 text-2xl">Order summary</h1>
         </div>
+        <% for( let food of Object.values(session.cart.items)) { %>
         <div class="order-list">
             <div class="flex items-center my-8">
-                <img class="w-24 rounded-md" src="/img/spring_rolls.jpg" alt="">
+                <img class="w-24 rounded-md" src="/img/<%= food.item.image %>" alt="">
                 <div class="flex-1 ml-4">
-                    <h1>Spring rolls</h1>
-                    <span>small</span>
+                    <h1><%= food.item.name %></h1>
+                    <span><%= food.item.size%></span>
                 </div>
-                <span class="flex-1">1 pcs</span>
-                <span class="font-bold font-lg">$200</span>
+                <span class="flex-1"><%= food.qty %> pcs</span>
+                <span class="font-bold font-lg">₹ <%= food.item.cost * food.qty %></span>
             </div>
-
         </div>
+        <%}%>
         <hr>
         <div class="text-right py-4">
             <div>
                 <span class="text-lg font-bold">Total amount:</span>
-                <span class="total-amount text-2xl font-bold ml-2">$200</span>
+                <span class="total-amount text-2xl font-bold ml-2">₹ <%= session.cart.totalPrice %></span>
             </div>
             <div>
                 <form class="mt-12" action="">
@@ -29,7 +31,7 @@
                     <input class="border border-gray-400 p-2 w-1/2 mb-4" type="text" placeholder="Address">
                     <div>
                         <button class="btn-primary px-6 py-2 rounded-full font-bold" type="submit">Order now</button>
-                        <!-- <a href="" class="btn-primary px-6 py-2 rounded-full font-bold">Login to continue</a> -->
+                        <a href="" class="btn-primary px-6 py-2 rounded-full font-bold">Login to continue</a>
                     </div>
                 </form>
             </div>
@@ -38,16 +40,18 @@
     </div>
 
 
-
-
-    <!-- <div class="empty-cart" >
+   <%}else{%>
+<!-- cart empty -->
+    <div class="empty-cart" >
         <div class="container mx-auto text-center" >
-            <h1 class="text-3xl font-bold uppercase mb-2">Bag Empty.</h1>
+            <h1 class="text-3xl font-bold uppercase mb-2">Cart Empty.</h1>
             <p class="text-gray-500 text-lg mb-8">You probably haven't ordered anything yet.
                 <br> To order anything, go to the main page.
             </p>
             <img class="w-2/5 mx-auto" src="/img/empty_cart.png" alt="empty-cart">
             <a href="/" class=" go-back inline-block px-6 py-2 rounded-full btn-primary text-black font-bold mt-12">Go back</a>  
         </div>    
-    </div> -->
+    </div>
+    <%}%>
+
 </section>

@@ -1,0 +1,19 @@
+<section class="menu container mx-auto py-8">
+    <h1 class="text-xl font-bold ml-40 border-b border-gray mr-40">Menu List 1</h1>
+    <div class="ml-40 mr-40 mb-10 grid grid-cols-4 gap-4 pt-6">
+        <% foods.forEach(function(food){ %>
+            <div class="mx-auto shadow-2xl p-1 rounded-lg items-center">
+                <div>
+                    <img class="w-56 h-auto rounded-lg" src="/img/<%= food.image%>" alt="">
+                    <h1 class="font-bold pl-2 text-lg"><%= food.name%></h1>
+                </div>
+                <div class="flex justify-center">
+                    <span class=" flex-1 pl-2 font-bold  text-lg">₹ <%= food.cost%></span>
+                    <button data-food="<%= JSON.stringify(food)%>" class="flex-1 add-to-cart btn-primary text-center rounded-full">Add</button>
+                </div>
+            </div>
+        </div>
+        <% } )%>
+
+    
+</section>
